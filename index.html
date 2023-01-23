@@ -1,0 +1,469 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="application-name" content="AniMixPlay">
+<meta name="apple-mobile-web-app-title" content="AniMixPlay">
+<meta name="msapplication-starturl" content="/">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, shrink-to-fit=no, user-scalable=no">
+<meta property="og:image" content="/icon.png">
+<meta property="og:title" content="AniMixPlay - Watch HD Anime for Free">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="theme-color" content="#191919">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/icon.png">
+<link rel="apple-touch-icon" href="/icon.png">
+<link rel="manifest" href="/assets/s/manifest.json">
+<title>AniMixPlay - Watch HD Anime for Free</title>
+<script type="text/javascript" src="/assets/lib/jquery.min.js" defer></script>
+<link rel="stylesheet" href="/assets/fonts.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/style.min.css?m12">
+<script type="text/javascript" src="/assets/main.min.js?m23" defer></script>
+<meta property="og:description" content="Watch Anime for free in HD quality with English subbed or dubbed."><meta name="description" content="Watch Anime for free in HD quality with English subbed or dubbed.">
+</head>
+<body style="background-color:rgb(25,25,25)">
+<div id="coverlight" style="z-index:8"></div>
+<div id="loadcontainer"><div class="loadindicator"></div></div>
+<div class="toppart">
+<div id="songContent" class="floattopsearch">
+<a id="backiconhome" onclick="window.history.back()"><i class="glyphicon glyphicon-chevron-left"></i></a>
+<a id="homeicon" href="/"><i class="glyphicon glyphicon-home"></i></a>
+<div id="searchbox">
+<input type="text" style="display:none">
+<input type="password" style="display:none">
+<a href="/"><img class="webtitle" alt="AnimixPlay" src="/assets/logo.png" /></a>
+<input class="form-control searchbar" placeholder="Search" autocomplete="off" id="q" type="search" onfocus="searchfocused()" onblur="searchblur()" />
+<button id="searchbutton" onClick="searchfull()"><i class="glyphicon glyphicon-search"></i></button>
+<a class="topmenubtn" title="Random anime" href="/random"><i class="glyphicon glyphicon-random"></i>Random</a>
+<a class="topmenubtn" title="A-Z List" href="/list">A-Z List</a>
+</div>
+<button id="menumobilebtn" OnClick="showmobilemenu()"><i class="glyphicon glyphicon-menu-hamburger"></i></button>
+<button id="showsearchbtn" OnClick="togglesearch()"><i class="glyphicon glyphicon-search"></i></button>
+</div>
+</div>
+<div class="quicksearchcontainer"><div class="resultcontainer">
+<div id="fullresultbtn">
+<a onClick="searchfull()">Full</a><a onClick="searchE1()">GOGO</a><a onClick="searchE11()">AL</a><a onClick="searchE6()">RUSH</a><a onClick="searchMAL()">MAL</a>
+</div>
+<ul class="quickresult"></ul>
+</div></div>
+<div class="middle">
+<div id="flexcontainer">
+<div class="leftside">
+<div id="pwaContainer">
+AniMixPlay PWA available<button id="pwaButton" class="btn btn-primary">Install PWA</button>
+</div>
+<div id="featuredcard">
+<div id="featuredbgcont">
+<img id="featuredbg" src="https://cdn.animixplay.to/min/mal/1440/127624.jpg" />
+</div>
+<div id="featuredcont">
+<a href="/anime/49828/Mobile_Suit_Gundam__The_Witch_from_Mercury"><img id="featuredimg" src="https://cdn.animixplay.to/min/mal/1440/127624.jpg" /></a>
+<div id="featuredtitle"><a href="/anime/49828/Mobile_Suit_Gundam__The_Witch_from_Mercury">Mobile Suit Gundam: The Witch from Mercury</a></div>
+<div id="featuredtext"> Multitude of corporations have entered space and built a huge economic system, a lone girl from the remote planet Mercury transfers to the Asticassia School of Technology. Her name is Suletta Mercury. With a scarlet light burning in her pure heart, this girl walks step by step through a new world. </div>
+<div id="featuredgenre"><i class="glyphicon glyphicon-tag"></i> Sci-Fi, Mecha, School, Space</div>
+<a id="featuredNext" onClick="showFeatured(curFeatured + 1)"><i class="glyphicon glyphicon-chevron-right"></i></a>
+<a id="featuredBack" onClick="showFeatured(curFeatured - 1)"><i class="glyphicon glyphicon-chevron-left"></i></a>
+</div>
+</div>
+<div id="announcement">
+Beware of fake sites, only <span style="color:#c1ba93;">animixplay.to</span> is ours.<br>
+Don't rely on google search! use bookmark instead.<br>
+<br>
+If you got problem try <i class="glyphicon glyphicon-repeat"></i> reload the player several times, or just switch to external player.<br>
+Also worth to try in incognito mode, disabling browser extension, or clearing cache.<br>
+<br>
+For mobile users, you can swipe left / right to open menu, schedule, and stream list.<br>
+You can also install PWA (add to homescreen) to launch AniMixPlay like an app.<br>
+<br>
+Read more info in our <a href="/info.html">info</a> page.<br>
+</div>
+<button type="button" id="readmorebtn" onClick="readmore()" class="btn btn-secondary btn-sm btn-lg btn-block"><i class="glyphicon glyphicon-menu-down"></i></button>
+<button type="button" id="openschedulebtn" onClick="showschedulemenu()"><i class="glyphicon glyphicon-time"></i> Schedule</button>
+<div id="navtab">
+<ul class="nav nav-tabs">
+<li id="allbtn" class="active" onClick="showall()"><a>Sub</a></li>
+<li id="dubbtn" onClick="showdub()"><a style="border-bottom: 1px solid #e36a6a;">Dub</a></li>
+<li id="recentbtn" onClick="showrecent()"><a>All</a></li>
+<li id="followedbtn" onClick="showfollow()"><a>Followed</a></li>
+<li id="popularbtn" onClick="showpopular()"><a>Popular</a></li>
+<li id="moviebtn" onClick="showmovie()"><a>Movie</a></li>
+</ul>
+</div>
+<div id="seasontopnav">
+<div id="prevseasonbtn" onClick="seasonPrev()">&lt; Previous season</div>
+<div id="nextseasonbtn" onClick="seasonNext()">Next season &gt;</div>
+<select id="topfilterselect" onchange="seasonFilterChange()">
+<option value="all">Show all</option>
+<option value="new">New</option>
+<option value="continuing">Continuing</option>
+</select>
+</div>
+<div id="genresortbtn">
+Sort by :
+<select id="topsortselect" onchange="filterSortChange()">
+<option value="any">none</option>
+<option value="popular" selected>Popularity</option>
+<option value="rating">Rating</option>
+<option value="latest">Latest update</option>
+</select>
+</div>
+<div id="resultplace"><ul class="searchresult"><li><a href="/v1/muv-luv-alternative-2nd-season/ep12" title="Muv-Luv Alternative 2nd Season">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/min/mal/1029/128722.jpg" />
+<div class="timetext">2022-12-21 18:30:04</div>
+<div class="rating">667</div>
+</div>
+<div class="details">
+<p class="name">Muv-Luv Alternative 2nd Season</p>
+<p class="infotext">EP 12/12</p>
+</div>
+</a></li><li><a href="/v1/do-it-yourself/ep12" title="Do It Yourself!!">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/i/e80bd9d8c34c064b0578cf83edf24ad5.jpg" />
+<div class="timetext">2022-12-21 18:05:05</div>
+<div class="rating">756</div>
+</div>
+<div class="details">
+<p class="name">Do It Yourself!!</p>
+<p class="infotext">EP 12/12</p>
+</div>
+</a></li><li><a href="/v1/mob-psycho-100-iii/ep12" title="Mob Psycho 100 III">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/i/d745de809e9219112a3d2dd36fada30f.jpg" />
+<div class="timetext">2022-12-21 17:05:03</div>
+<div class="rating">868</div>
+</div>
+<div class="details">
+<p class="name">Mob Psycho 100 III</p>
+<p class="infotext">EP 12/12</p>
+</div>
+</a></li><li><a href="/v1/futoku-no-guild-uncensored/ep12" title="Immoral Guild (Uncensored)">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/i/d8c36cb3692bf0c53e46bfa86c7b33e7.jpg" />
+<div class="timetext">2022-12-21 16:25:06</div>
+<div class="rating">655</div>
+</div>
+<div class="details">
+<p class="name">Immoral Guild (Uncensored)</p>
+<p class="infotext">EP 12/12</p>
+</div>
+</a></li><li><a href="/v1/renai-flops/ep11" title="Love Flops">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/i/bfb3e74f3dbc9fccb10f3560db065d3d.jpg" />
+<div class="timetext">2022-12-21 16:20:04</div>
+<div class="rating">654</div>
+</div>
+<div class="details">
+<p class="name">Love Flops</p>
+<p class="infotext">EP 11/12</p>
+</div>
+</a></li><li><a href="/v1/kage-no-jitsuryokusha-ni-naritakute/ep12" title="The Eminence in Shadow">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/i/80f421ad67210c2d6ab58fb38a3c078c.jpg" />
+<div class="timetext">2022-12-21 14:45:04</div>
+<div class="rating">783</div>
+</div>
+<div class="details">
+<p class="name">The Eminence in Shadow</p>
+<p class="infotext">EP 12/20</p>
+</div>
+</a></li><li><a href="/v1/human-bug-daigaku/ep12" title="The Human Crazy University">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/i/6125aeb9f86cc9154688b0a50744c2ef.jpg" />
+<div class="timetext">2022-12-21 14:40:04</div>
+<div class="rating">650</div>
+</div>
+<div class="details">
+<p class="name">The Human Crazy University</p>
+<p class="infotext">EP 12/12</p>
+</div>
+ </a></li><li><a href="/v1/yuri-no-aida-ni-hasamareru-aru-asa-dummyhead-ni-natteita-ore-kun-no-jinsei/ep10" title="Yuri no Aida ni Hasamareru. Aru Asa Dummyhead ni Natteita Ore-kun no Jinsei">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/i/21f38d5313b4fcaa3e467e93845240b5.jpg" />
+<div class="timetext">2022-12-21 10:12:07</div>
+<div class="rating">513</div>
+</div>
+<div class="details">
+<p class="name">Yuri no Aida ni Hasamareru. Aru Asa Dummyhead ni Natteita Ore-kun no Jinsei</p>
+<p class="infotext">EP 10/12</p>
+</div>
+</a></li><li><a href="/v1/tunshi-xingkong-2nd-season/ep41" title="Swallowed Star">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/i/dc3c595166332a6986427b41b9fc7f26.jpg" />
+<div class="timetext">2022-12-21 08:45:04</div>
+<div class="rating">771</div>
+</div>
+<div class="details">
+<p class="name">Swallowed Star</p>
+<p class="infotext">EP 41/52</p>
+</div>
+</a></li><li><a href="/v1/chainsaw-man/ep11" title="Chainsaw Man">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/min/mal/1806/126216.jpg" />
+<div class="timetext">2022-12-20 17:10:03</div>
+<div class="rating">882</div>
+</div>
+<div class="details">
+<p class="name">Chainsaw Man</p>
+<p class="infotext">EP 11/12</p>
+</div>
+</a></li><li><a href="/v1/nanatsu-no-taizai-ensa-no-edinburgh" title="The Seven Deadly Sins: Grudge of Edinburgh">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/i/303ccf93f5fce18562f572c29d801dd3.jpg" />
+<div class="timetext">2022-12-20 16:35:04</div>
+<div class="rating">618</div>
+</div>
+<div class="details">
+<p class="name">The Seven Deadly Sins: Grudge of Edinburgh</p>
+<p class="infotext">EP 1/2</p>
+</div>
+</a></li><li><a href="/v1/yama-no-susume-next-summit/ep12" title="Encouragement of Climb: Next Summit">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/i/669727fa74ae9edd2dd574be6c872d96.jpg" />
+<div class="timetext">2022-12-20 16:15:05</div>
+<div class="rating">725</div>
+</div>
+<div class="details">
+<p class="name">Encouragement of Climb: Next Summit</p>
+<p class="infotext">EP 12/12</p>
+</div>
+</a></li><li><a href="/v1/meitantei-conan-hannin-no-hanzawa-san/ep12" title="Detective Conan: The Culprit Hanazawa">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/min/mal/1560/125527.jpg" />
+<div class="timetext">2022-12-20 15:55:04</div>
+<div class="rating">685</div>
+</div>
+<div class="details">
+<p class="name">Detective Conan: The Culprit Hanazawa</p>
+<p class="infotext">EP 12/12</p>
+</div>
+</a></li><li><a href="/v1/vazzrock-the-animation/ep12" title="Vazzrock the Animation">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/min/mal/1488/127334.jpg" />
+<div class="timetext">2022-12-20 15:10:04</div>
+<div class="rating">490</div>
+</div>
+<div class="details">
+<p class="name">Vazzrock the Animation</p>
+<p class="infotext">EP 12/13</p>
+</div>
+</a></li><li><a href="/v1/shinobi-no-ittoki/ep12" title="Shinobi no Ittoki">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/i/b091ac47a9c1918e05598528b63d3cd8.jpg" />
+<div class="timetext">2022-12-20 14:10:04</div>
+<div class="rating">608</div>
+</div>
+<div class="details">
+<p class="name">Shinobi no Ittoki</p>
+<p class="infotext">EP 12/12</p>
+</div>
+</a></li><li><a href="/v1/isekai-ojisan/ep11" title="Uncle from Another World">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/i/75e01da6d098390e9a9d741eb4f20974.jpg" />
+<div class="timetext">2022-12-20 01:30:04</div>
+<div class="rating">785</div>
+</div>
+<div class="details">
+<p class="name">Uncle from Another World</p>
+<p class="infotext">EP 11/13</p>
+</div>
+</a></li><li><a href="/v1/cool-doji-danshi/ep11" title="Play It Cool, Guys">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/i/6a34b962f903f3e9e9f02cb08a4d92a8.jpg" />
+<div class="timetext">2022-12-19 19:10:04</div>
+<div class="rating">751</div>
+</div>
+<div class="details">
+<p class="name">Play It Cool, Guys</p>
+<p class="infotext">EP 11/24</p>
+</div>
+</a></li><li><a href="/v1/bleach-sennen-kessen-hen/ep11" title="Bleach: Thousand-Year Blood War">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/i/5660afa590de3d8493d72abc2aef7d4c.jpg" />
+<div class="timetext">2022-12-19 18:20:37</div>
+<div class="rating">910</div>
+</div>
+<div class="details">
+<p class="name">Bleach: Thousand-Year Blood War</p>
+<p class="infotext">EP 11/13</p>
+</div>
+</a></li><li><a href="/v1/shinmai-renkinjutsushi-no-tenpo-keiei/ep12" title="Management of a Novice Alchemist">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/i/0a75ecf83847cf607748e50b0822f58a.jpg" />
+<div class="timetext">2022-12-19 14:45:04</div>
+<div class="rating">659</div>
+</div>
+<div class="details">
+<p class="name">Management of a Novice Alchemist</p>
+<p class="infotext">EP 12/12</p>
+</div>
+</a></li><li><a href="/v1/itai-no-wa-iya-nano-de-bougyoryoku-ni-kyokufuri-shitai-to-omoimasu-ii" title="BOFURI: I Don't Want to Get Hurt, so I'll Max Out My Defense Season 2">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/min/mal/1782/128859.jpg" />
+<div class="timetext">2022-12-19 12:23:16</div>
+<div class="rating">0</div>
+</div>
+<div class="details">
+<p class="name">BOFURI: I Don't Want to Get Hurt, so I'll Max Out My Defense Season 2</p>
+<p class="infotext">EP 1/12</p>
+</div>
+</a></li><li><a href="/v1/peter-grill-to-kenja-no-jikan-super-extra/ep11" title="Peter Grill and the Philosopher's Time: Super Extra">
+<div class="searchimg">
+ <img class="resultimg" alt="" src="https://cdn.animixplay.to/i/92ae77db7592284a7fb1e6bc5a3db18c.jpg" />
+<div class="timetext">2022-12-18 18:40:04</div>
+<div class="rating">620</div>
+</div>
+<div class="details">
+<p class="name">Peter Grill and the Philosopher's Time: Super Extra</p>
+<p class="infotext">EP 11/12</p>
+</div>
+</a></li><li><a href="/v1/idolish7-third-beat-part-2/ep12" title="IDOLiSH7 Third BEAT! Part 2">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/i/7e37eed35fff55a26d8d432f6bd4b46a.jpg" />
+<div class="timetext">2022-12-18 15:35:05</div>
+<div class="rating">824</div>
+</div>
+<div class="details">
+<p class="name">IDOLiSH7 Third BEAT! Part 2</p>
+<p class="infotext">EP 12/?</p>
+</div>
+</a></li><li><a href="/v1/fuufu-ijou-koibito-miman/ep11" title="More than a married couple, but not lovers.">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/i/a66ef3f4fe08cc606b968a4833085b29.jpg" />
+<div class="timetext">2022-12-18 15:00:05</div>
+<div class="rating">762</div>
+</div>
+<div class="details">
+<p class="name">More than a married couple, but not lovers.</p>
+<p class="infotext">EP 11/12</p>
+</div>
+</a></li><li><a href="/v1/fumetsu-no-anata-e-2nd-season/ep9" title="To Your Eternity Season 2">
+<div class="searchimg">
+<img class="resultimg" alt="" src="https://cdn.animixplay.to/i/1c69a33794be994503d3e35202a4964d.jpg" />
+<div class="timetext">2022-12-18 13:40:04</div>
+<div class="rating">803</div>
+</div>
+<div class="details">
+<p class="name">To Your Eternity Season 2</p>
+<p class="infotext">EP 9/20</p>
+</div>
+</a></li></ul><div id="bottommsg"><div id="loadmorelist" OnClick="loadmorenewep();"><i class="glyphicon glyphicon-menu-down"></i> Load more</div></div></div>
+<div id="loadingtext">
+<svg class="spinner" width="75px" height="75px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+<circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+</svg><br><br>Loading...
+</div>
+<div id="resultAlt"><div id="loadmoresearch">Loading...</div></div>
+<br>
+</div>
+<div class="rightside" id="rightsidee">
+<div class="rightcard">
+<div class="loadingreplacement">Loading...</div>
+<div class="usercard"></div>
+</div>
+<div class="rightcard signinhome" id="gsignsection">
+<div class="subtitleright" style="border-bottom:none"></div>
+<div id="gconnectbtn"><img id="gconnectbtnimg" onClick="connectGoogle()" src="https://cdn.animixplay.to/s/gsign.jpg"></div>
+</div>
+<div class="rightcard mobilemenureplace">
+<a class="topmenubtn" onClick="showschedulemenu()"><i class="glyphicon glyphicon-time"></i>Schedule</a>
+<a class="topmenubtn" title="Random anime" href="/random"><i class="glyphicon glyphicon-random"></i>Random</a>
+<a class="topmenubtn" title="A-Z List" href="/list">A-Z List</a>
+</div>
+<div class="rightcard">
+<div class="flexrightcard" id="seasonfilter">
+<div id="seasonleft">
+<label for="seasonselect">Season:</label>
+<select id="seasonselect">
+<option value="Winter">Winter</option>
+<option value="Spring">Spring</option>
+<option value="Summer">Summer</option>
+<option value="Fall">Fall</option>
+</select>
+</div>
+<div id="yearright">
+<label for="yearselect">Year:</label>
+<select id="yearselect"></select>
+</div>
+<div style="flex:1">
+<div id="seasonalgobtn" onClick="seasonGo()">GO</div>
+</div>
+</div>
+</div>
+<div class="rightcard">
+<div class="subtitleright">Genres</div>
+<div class="flexrightcard" id="genreplace">Action, Adventure, Anti-Hero, CGDCT, College, Comedy, Drama, Dub, Ecchi, Fantasy, Gag Humor, Game, Harem, Historical, Horror, Idol, Isekai, Iyashikei, Josei, Kids, Magical Girl, Martial Arts, Mecha, Military, Movie, Music, Mythology, Mystery, Otaku, Parody, Police, Psychological, Racing, Revenge, Romance, Rural, Samurai, School, Sci-Fi, Seinen, Shoujo, Shoujo Ai, Shounen, Shounen Ai, Slice of Life, Space, Sports, Super Power, Supernatural, Survival, Suspense, Time Travel, Vampire, Work</div>
+<button type="button" id="expandbtn" onClick="expandgenre()" class="btn btn-secondary btn-sm btn-lg btn-block"><i class="glyphicon glyphicon-menu-down"></i></button>
+</div>
+<div class="rightcard" style="display:none; border-top: 1px solid #3c3c3c;">
+<div class="flexrightcard" id="filterplace">
+<div class="halfleft">
+<label for="typeselect">Stream:</label>
+<select id="typeselect" onchange="typechange()">
+<option value="0">Any</option>
+<option value="1">GOGO Stream</option>
+<option value="11">AL Stream</option>
+<option value="6">RUSH Stream</option>
+</select>
+</div>
+<div class="halfright">
+<label for="langselect">Sub/Dub:</label>
+<select id="langselect" onchange="langchange()">
+<option value="any">Any</option>
+<option value="sub">Sub</option>
+<option value="dub">Dub</option>
+</select>
+</div>
+</div>
+</div>
+<div class="rightcard" style="margin-bottom:20px">
+<div class="subtitleright">Weekly Top</div>
+<div id="ongoingplace" style="height:unset"></div>
+<button type="button" id="expandbtn2" onClick="expandweekly()" class="btn btn-secondary btn-sm btn-lg btn-block"><i class="glyphicon glyphicon-menu-down"></i></button>
+</div>
+</div>
+</div>
+<div id="topmid"></div>
+</div>
+<div id="playerleftsidebar" class="schedulemenucontainer">
+<button id="recomendedclosebtn" style="margin-left:10px" OnClick="showschedulemenu()"><i class="glyphicon glyphicon-arrow-left"></i></button>
+<div id="seasontitle"></div>
+<div id="scheduletimezone"></div>
+<div id="recomendedlist" style="padding-top:unset"></div>
+<div id="schedulenotice">Release time is estimated</div>
+</div>
+<div class="leftbottom">
+<span id="donatelabel">RSS</span><a class="customicon rssicon" href="/rss.html"></a>
+<div class="floatright">
+<div class="togglelabel">Chat</div>
+<label class="switch">
+<input type="checkbox" id="enablechat">
+<span class="slider round"></span>
+</label> <a href="/info.html" style="font-size:17px;margin-left:4px"><i class="glyphicon glyphicon-info-sign"></i></a><br>
+</div>
+</div>
+<div class="footer">
+<span class="bottomtext">
+Watch HD Anime for Free ©2022 AniMixPlay
+</span>
+Disclaimer: This site does not store any files on its server. All contents are provided by non-affiliated third parties.
+</div>
+<div id="notifiaction"></div>
+<div id="lastwatch">
+<i onClick="lastwatchclose();" id="lastwatchclosebtn" class="glyphicon glyphicon-remove"></i>
+Continue watching :<br>
+<a id="lastwatchlink">
+<div id="lastwatchtitle"></div>
+<div id="lastwatchurl"></div>
+</a>
+</div>
+<script type="text/javascript">
+var nowtime = "2023-01-23 17:54:07";
+var envYear = 2022;
+var envSeason = 'Fall';
+var curFeatured = 8;
+</script>
+</body>
+</html>
